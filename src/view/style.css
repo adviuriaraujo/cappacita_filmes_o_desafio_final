@@ -1,0 +1,291 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: #333;
+    max-width: 100%;
+    margin: auto;
+}
+
+#header-top{
+    padding: 16px;
+    text-align: center;
+    background-image: linear-gradient(to bottom right,#BE44C0, #411959);
+    border-radius: 0.5rem;
+    margin: 0.5rem 0.5rem 0rem;
+}
+
+#nav-top{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #333;
+    width: 100%;
+    
+}
+
+#ul-top{
+    padding: 0rem;
+    list-style: none;
+}
+
+#nav-top a{
+    padding: 1rem;
+    margin: 0.5rem;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border-style: solid;
+    border-color: #ddd;
+    border-width: thin;
+    border-radius: 0.5rem;
+}
+
+#nav-top a:hover {
+    background-color: rgb(214, 34, 214);
+    color: black;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: rgb(214, 34, 214);
+    border-width: thin;
+    box-shadow: 10px 10px 10px #a53ba75b;
+}
+
+#canva{
+    margin: 0rem 5rem 1rem;
+}
+
+.divCanva{
+    margin: 0em;
+}
+
+.main-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-discover{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.header-discover h4{
+    text-align: center;
+    align-self: center;
+    display: inline;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 0.5rem;
+    border-color: #be44c0bb;
+    background-image: linear-gradient(to bottom right,#be44c0a4, #42195960);
+    color: #ddd;
+    padding: 0.5rem;
+    box-shadow: 10px 10px 10px #260f33bb;
+}
+
+main{
+   width: 100%;
+}
+
+#main{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filme{
+    width: 308.38px;
+    height: 230.38px;
+    margin: 0.2rem;
+    padding: 0.2rem;    
+    color:rgb(15, 15, 15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.filme-info{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filme img{
+    border-radius: 0.5rem;
+    width: auto;
+    box-shadow: 10px 10px 10px rgb(27, 27, 27);
+}
+
+.filme img:hover{
+    box-shadow: 0px 0px 10px 10px rgba(172, 172, 172, 0.349);
+    width: 110%;
+}
+
+.filme p{
+    max-width: 300px;
+    text-align: center;   
+}
+.filme-info p a{
+    color: #ddd;
+}
+
+article{
+    margin: 1rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-width: thin;
+    border-color: #ddd;
+    padding: 1rem;
+    color: #ddd;
+}
+
+#divBTN{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-altu{
+    width: auto;
+    align-self: center;
+    margin: 0.5rem;
+}
+.btn-altu:hover{
+    box-shadow: 0px 0px 10px 1px rgba(218, 218, 218, 0.349);
+}
+
+.aside{
+    margin: 1rem;
+}
+
+#aside_h{
+    padding: 1rem 0rem 0rem 1rem;
+}
+
+footer{
+    margin: 0.5rem;
+    padding: 0px;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: solid;
+    border-color: #ddd;
+    border-radius: 0.5rem;
+}
+footer h6{
+    text-align: center;
+    color: #ddd;
+}
+
+footer ul{
+    list-style: none;
+    padding-left: 0rem;
+}
+
+footer ul a{
+    padding: 1rem 0px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+footer ul a:hover{
+    background-color: rgb(214, 34, 214);
+    color: black;
+    border-radius: 0.5rem;
+    box-shadow: 10px 10px 10px #a53ba75b;
+}
+
+#commentFieldset{
+    align-self: center;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #ddd;
+    border-radius: 0.5rem;
+}
+
+#comment{
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 768px){
+    
+    #nav-top{
+        flex-direction: row;
+    }
+    
+    #nav-top a{
+        padding: 1rem 1rem;
+        display: flex;
+    }
+    
+    
+    #nav-top ul{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+        margin: 0.5rem 1rem 0.5rem;
+    }
+    
+    
+
+    .main-section{
+        flex-direction: row;
+    }
+    main{
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    
+    }
+    
+    .aside{
+        width: 30%;
+        margin: 1rem;
+        align-self: flex-start;
+    }
+    
+    
+        
+    footer{
+        padding: 1rem 0px;
+        background-color: #333;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        border-color: #ddd;
+        border-style: solid;
+    }
+
+    
+
+    footer h6{
+        align-self: center;
+        
+    }
+    
+    footer ul a{
+        padding: 1rem;
+        text-decoration: underline;
+    }
+    
+    
+    /*formulário*/
+    
+    fieldset{
+        width: 50%;
+    }
+    
+}
