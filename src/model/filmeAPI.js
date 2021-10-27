@@ -10,8 +10,8 @@ async function discover(){
         return result.data  
        
     } catch (error) {
-        console.error(error)
-        
+        console.error(error.response.status)
+        return error.response.status
     }
 }
 
@@ -24,7 +24,7 @@ async function lista(id) {
         
     } catch (error) {
         console.error(error)
-        
+        return error.response.status
     }
 }
 
@@ -37,7 +37,7 @@ async function movie(id) {
         return result.data
     } catch (error) {
         console.error(error)
-        
+        return error.response.status
     }
 }
 

@@ -8,14 +8,14 @@
 //Base da URL para pegar o cartaz de um filme no TMDB. 
 const imgURL = 'https://image.tmdb.org/t/p/w500'
 const imgURL300 = 'https://image.tmdb.org/t/p/w300'
-
+const myPort = 5500
 
 const seletor = document.querySelector('h1')
 //O seletor serve separar o script aplicado a cada página html dentro do mesmo script.js
 
 //script da Home
 if (seletor.id =='home'){
-    const apiURL = "http://localhost:5500/discover"
+    const apiURL = `http://localhost:${myPort}/discover`
     const tmdbURL = "https://www.themoviedb.org/movie/"
     const main = document.getElementById('main')
 
@@ -25,7 +25,7 @@ if (seletor.id =='home'){
           try{
             const response = await axios.get(apiURL);
           
-            //console.log(response.data.results)//Caso queira ver os results
+            console.log(response)//Caso queira ver os results
             mostrarFilmes(response.data.results)
           }
 
@@ -35,6 +35,7 @@ if (seletor.id =='home'){
             console.error(error)
             main.innerHTML = '';
             const filmeError = document.createElement('div')
+            filmeError.classList.add('error')
             if(error.response.status == 400){
             filmeError.innerHTML = `
               <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
@@ -72,8 +73,83 @@ if (seletor.id =='home'){
     
     //Função para redirecionar para as páginas de cada filme ao clicar no cartaz
   function redirect(id){      
-    const filmePage = window.open(`${tmdbURL}${id}`, '_blank')
-    return filmePage
+    let mainHeader = document.getElementById('header-discover')
+    mainHeader.hidden = true
+
+    let stylesheet = document.getElementById('stylesheet')
+    stylesheet.href = "styleID.css"
+    getDetails(id)
+    async function getDetails(id) {
+      try{
+        const response = await axios.get(`http://localhost:5500/movie/${id}`);
+      
+        //console.log(response)//Caso queira ver os results
+        mostrarDetalhes(response.data)
+      }
+
+//Tratativas dos erros 400, 401, 404, 500 e uma tratativa genérica. Foram usadas imagens do https://http.cat/ para os erros porque eu gosto de gatos, apesar de ter alergia.
+//As imagens e mensagens de erro foram inseridas no mesmo formato que seriam dos filmes exibidos.
+      catch(error){
+        console.error(error)
+        main.innerHTML = '';
+        const filmeError = document.createElement('div')
+        filmeError.classList.add('error')
+        if(error.response.status == 400){
+        filmeError.innerHTML = `
+          <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
+          <h3>Desculpe, ocorreu um erro! Possíveis soluções para esse erro são limpar o cache ou cookies do browser. Para saber mais, <a href="https://www.google.com/search?q=error+400+tmdb+api&oq=error+400+tmdb+api&aqs=chrome..69i57j33i22i29i30.5676j0j7&sourceid=chrome&ie=UTF-8" target="_blank">clique aqui</a></h3>
+        ` 
+        } else if(error.response.status == 401){
+          filmeError.innerHTML = `
+          <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
+          <h3>Desculpe, ocorreu um erro! Por favor, confira se sua chave de API TMDB é válida. Para saber mais, <a href="https://www.google.com/search?q=error+401+tmdb+api&sxsrf=AOaemvLUzlykyhtL_3nCoqJ-O_1fWDttqA%3A1631723788221&ei=DCFCYZSBDbnZ1sQPp_m4kAM&oq=error+401+tmdb+api&gs_lcp=Cgdnd3Mtd2l6EAM6BwgAEEcQsANKBAhBGABQtpwQWNGdEGCKpBBoAXACeACAAYsBiAGLApIBAzAuMpgBAKABAcgBCMABAQ&sclient=gws-wiz&ved=0ahUKEwiUt5LmtIHzAhW5rJUCHac8DjIQ4dUDCA4&uact=5">clique aqui</a></h3>
+        `
+        } else if(error.response.status == 404){
+          filmeError.innerHTML = `
+          <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
+          <h3>Desculpe, ocorreu um erro! Os recursos pedidos não foram encontrados! Por favor, tente novamente mais tarde</h3>
+        `
+        } else if (error.response.status == 500) {
+          filmeError.innerHTML = `
+          <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
+          <h3>Desculpe, ocorreu um erro com nosso servidor! Por favor, tente novamente mais tarde</h3>
+        `
+
+        } else {
+          filmeError.innerHTML = `
+          <h3>Sinto muito, estamos com uma instabilidade no servidor! Por favor, tente novamente mais tarde</h3>
+        `
+
+        }
+
+        main.appendChild(filmeError)
+        
+      }
+    }
+
+    function mostrarDetalhes(response) {
+      main.innerHTML = '';  
+                
+      const filmeElem = document.createElement('div');
+      filmeElem.classList.add(`filme`);
+      filmeElem.innerHTML = `
+        <img src="${imgURL+response.poster_path}" onclick="redirect(${response.id})" alt="${response.title}">
+        <div class="filme-info">
+          <h3><a href="./${response.id}.html" target="_self">${response.title}(${response.release_date.slice(0,4)})</a></h3>
+          <div class="overview">
+            <h5>Descrição</h5>
+            ${response.overview}
+          </div>
+  
+        </div>
+  
+        
+      `
+  
+      main.appendChild(filmeElem)
+      
+          
+    }
   }
 
     //Função para mostrar os filmes do TMDB dentro do main no html.
@@ -99,6 +175,8 @@ if (seletor.id =='home'){
       });
         
     }
+
+    
 }
 
 //script da Destaques
@@ -124,6 +202,7 @@ else if (seletor.id == 'destaques'){
             console.error(error)
             main.innerHTML = '';
             const filmeError = document.createElement('div')
+            filmeError.classList.add('error')
             if(error.response.status == 400){
             filmeError.innerHTML = `
               <img src="https://http.cat/${error.response.status}" alt="Erro ${error.response.status}">
@@ -207,20 +286,7 @@ else if(seletor.id == 'sobre'){
     aside.innerHTML = '<h4 id="aside_h">Confira os últimos comentários:</h4>'
     
     
-    let response = fetch('http://localhost:5500/exibir',
-        {
-          method:'get',
-          mode: 'cors',
-          headers:{
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Max-Age': 86400
-          
-          }
-        }
-    )
+    let response = fetch('http://localhost:5500/exibir')
     .then(response=> response.json())
     .then((data)=> data)
     var result = await response
@@ -265,6 +331,7 @@ else if (seletor.id == 'chihiro'){
       mostrarFilmes(response.data)
     } catch(error){
       console.error(error)
+      
     }}
   
   //Função para redirecionar para as páginas de cada filme ao clicar no cartaz

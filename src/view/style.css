@@ -99,6 +99,15 @@ main{
     align-items: center;
 }
 
+.error{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 50%;
+    justify-self: center;
+    color: #be44c0bb;
+}
+
 .filme{
     width: 308.38px;
     height: 230.38px;

@@ -8,7 +8,11 @@ require("dotenv").config({ path: "./.env" })
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors())
+app.use(cors({
+    origin: "*",
+    methods: "*",
+    credentials: true
+}))
 
 app.use(express.json())
 
@@ -26,6 +30,11 @@ app.get('/list/:id', async (req, res) => {
 
 app.get('/movie/:id', async (req, res) => {
     res.send(await film.movie(req.params.id))
+})
+
+app.get('/details/movie/:id', async (req, res) => {
+    res.render('details', {id: req.params.id})
+    //res.send(await film.movie(req.params.id))
 })
 
 app.get('/exibir', async (req, res) =>{
