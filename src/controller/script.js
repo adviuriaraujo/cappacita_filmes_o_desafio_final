@@ -81,7 +81,7 @@ if (seletor.id =='home'){
     getDetails(id)
     async function getDetails(id) {
       try{
-        const response = await axios.get(`http://localhost:5500/movie/${id}`);
+        const response = await axios.get(`http://localhost:${myPort}/movie/${id}`);
       
         //console.log(response)//Caso queira ver os results
         mostrarDetalhes(response.data)
@@ -183,7 +183,7 @@ if (seletor.id =='home'){
 else if (seletor.id == 'destaques'){
   
   //local com o id da lista de filmes
-  const apiURL = "http://localhost:5500/list/7107870"
+  const apiURL = `http://localhost:${myPort}/list/7107870`
   const main = document.getElementById('main')
 
   //Função para chamar a API do TMDB. Foi usado o axios no método get.
@@ -326,7 +326,7 @@ else if (seletor.id == 'chihiro'){
   getFilme(idFilme)
   async function getFilme(id) {
     try {
-      const response = await axios.get(`http://localhost:5500/movie/${id}`);
+      const response = await axios.get(`http://localhost:${myPort}/movie/${id}`);
       //console.log(response);//caso queira ver a response
       mostrarFilmes(response.data)
     } catch(error){
@@ -376,7 +376,7 @@ else if (seletor.id == 'marnie'){
   getFilme(idFilme)
   async function getFilme(id) {
     try {
-      const response = await axios.get(`http://localhost:5500/movie/${id}`);
+      const response = await axios.get(`http://localhost:${myPort}/movie/${id}`);
       //console.log(response);//caso queira ver a response
       mostrarFilmes(response.data)
     } catch(error){
@@ -425,7 +425,7 @@ else if (seletor.id == 'kiki'){
   getFilme(idFilme)
   async function getFilme(id) {
     try {
-      const response = await axios.get(`http://localhost:5500/movie/${id}`);
+      const response = await axios.get(`http://localhost:${myPort}/movie/${id}`);
       //console.log(response);//caso queira ver a response
       mostrarFilmes(response.data)
     } catch(error){
@@ -474,7 +474,7 @@ else if (seletor.id == 'ponyo'){
   getFilme(idFilme)
   async function getFilme(id) {
     try {
-      const response = await axios.get(`http://localhost:5500/movie/${id}`);
+      const response = await axios.get(`http://localhost:${myPort}/movie/${id}`);
       //console.log(response);//caso queira ver a response
       mostrarFilmes(response.data)
     } catch(error){
@@ -522,7 +522,7 @@ async function enviar(){
   let comment = document.getElementById('comment').value
 
   //Realiza uma requisição assíncrona com método post, envia um json no body, ativa cross-origin
-  let response = fetch('http://localhost:5500/submit',
+  let response = fetch(`http://localhost:${myPort}/submit`,
       {
         method:'post',
         body:JSON.stringify(
